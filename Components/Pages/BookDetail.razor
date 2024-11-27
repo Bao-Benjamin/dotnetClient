@@ -1,0 +1,30 @@
+@page "/bookdetail/{id}"
+@inherits BookDetailsBase;
+
+@if (book == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-header">
+                    <h1>@book.Name</h1>
+                </div>
+                <div class="card-body text-center">
+                    @* <img class="card-img-top" src="@staff.Photo" /> *@
+                    <h4>Book ID: @book.Id</h4>
+                    <h4>Publisher: @book.Publisher</h4>
+                    <h4>Quantity: @book.Quantity</h4>
+                    <h4>Unit Price: @book.UnitPrice</h4>
+                    <h4>Price: @book.Price</h4>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="/booklist" class="btn btn-primary">Back</a>                    
+                </div>
+            </div>
+        </div>
+    </div>
+}

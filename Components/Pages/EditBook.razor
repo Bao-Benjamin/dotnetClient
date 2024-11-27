@@ -1,0 +1,61 @@
+@page "/editbook/{id}"
+@inherits EditBookBase;
+
+@if (book == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Edit Book: @book.Name</h1>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" @bind="book.Name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Publisher</label>
+                        <input type="text" class="form-control" @bind="book.Publisher" />
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control" @bind="book.Quantity" />
+                    </div>
+                    <div class="form-group">
+                        <label>Unit Price</label>
+                        <input type="number" class="form-control" @bind="book.UnitPrice" />
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" class="form-control" @bind="book.Price" />
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-success" @onclick="UpdateBook">Save</button>
+                    <a href="/booklist" class="btn btn-primary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        if (int.TryParse(Id, out int parsedId))
+        {
+            book = await bookService.GetBook(parsedId);
+        }
+    }
+
+    private async Task UpdateBook()
+    {
+        await bookService.UpdateBook(book);
+        NavigationManager.NavigateTo("/booklist");
+    }
+}

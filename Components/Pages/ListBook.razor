@@ -1,0 +1,27 @@
+@page "/booklist"
+@inherits BookListBase
+@if (books == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="card-group">
+        @foreach (var b in books)
+        {
+            <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
+                <div style="height: 100%" class="card h-100">
+                    <div class="card-header">
+                        <h3>@b.Name</h3>
+                    </div>
+                    @* <img class="card-img-top imageThumbnail" height="100%" src ="@staff.Photo" /> *@
+                    <div class="card-footer text-center">
+                        <a href="@($"bookdetail/{b.Id}")" class="btn btn-primary m-1">View</a>
+                        <a href="@($"editbook/{b.Id}")" class="btn btn-primary m-1">Edit</a>
+                        <a href="@($"delete/{b.Id}")" class="btn btn-danger m-1">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
